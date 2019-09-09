@@ -1,0 +1,48 @@
+<html>
+
+   <head>
+      <title>Home</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+      <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+   </head>
+
+   <body style="background-color: #80deea;">
+      <h1>Recommate.ai</h1>
+      <p style="text-align: center;" class="text-muted">&#169; Sounak Bhattacharya & Mahak Agarwal</p>
+      <div style="text-align: center; padding-top: 20px;">
+         <form method="POST">
+         	<!-- Input box and Submit button -->
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-9" style="text-align: right;">
+                     <input name="text" id="main_search">
+                  </div>
+                  <div class="col-md-3" style="text-align: left; margin-left: 0px;">
+                     <input id="btn" type="submit" name="Let's GO!">
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+
+      <!-- Displaying Search Results -->
+
+      {% for item in options %}
+	      <div class="card" style="width: 18rem; height: 5rem; margin-left: 40%; margin-bottom: 4px;">
+	         <div class="card-body" style="margin-top: 6px; text-align: center;">
+	            <p class="card-text">{{item}}</p>
+	         </div>
+	      </div>
+      {% endfor %}
+
+      <!-- Displaying Error Message in case of Server error -->
+
+      {% block content %}
+	      {% if task == 'fail' %}
+	      	<h2>Sorry, this movie is not present in our Database :/ </h2>
+	      {% endif %}
+      {% endblock %}
+   </body>
+</html>
